@@ -1,0 +1,43 @@
+PDF
+ └──> Text Extraction
+        └──> Chunking
+                └──> Query-based Chunk Search
+                        └──> Context Injection
+                                └──> LLM Answer
+                                        └──> Gradio Chat UI
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+User types message
+      ↓
+Gradio calls chat(message, history)
+      ↓
+chat() calls get_answer()
+      ↓
+get_answer() returns string
+      ↓
+chat() returns string
+      ↓
+Gradio appends (message, response) to history
+      ↓
+Gradio displays updated chat
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+User types in Gradio UI
+        ↓
+Gradio passes text as `message`
+        ↓
+chat(self, message, history)
+        ↓
+message → retrieve_relevant_chunks(message)
+        ↓
+message → build_prompt(..., user_question)
+        ↓
+user_question inserted into prompt
+        ↓
+LLM generates answer
+        ↓
+Answer shown in chat UI
